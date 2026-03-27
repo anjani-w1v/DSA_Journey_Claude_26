@@ -5,7 +5,7 @@ using namespace std;
 //     float cgpa;
 //     string name;
 //     cout<<"Enter your name: ";
-//     cin>>name;
+//     cin>>name; 
 //     cout<<"Enter your age: ";
 //     cin>>age;
 //     cout<<"Enter your CGPA: ";
