@@ -8,7 +8,7 @@ using namespace std;
 //     cin>>name; 
 //     cout<<"Enter your age: ";
 //     cin>>age;
-//     cout<<"Enter your CGPA: ";
+//     cout<<"Enter your CGPA: "; 
 //     cin>>cgpa;
 //     cout<<"Hi "<<name<<"! You are "<<age<<" years old and your cgpa is "<<cgpa<<endl;
 
