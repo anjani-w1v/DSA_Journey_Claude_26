@@ -12,7 +12,7 @@ using namespace std;
 //     cin>>cgpa;
 //     cout<<"Hi "<<name<<"! You are "<<age<<" years old and your cgpa is "<<cgpa<<endl;
 
-//     int num1, num2;
+//     int num1, num2; 
 //     cout<<"Enter number 1: ";
 //     cin>>num1;
 //     cout<<"Enter number 2: ";
