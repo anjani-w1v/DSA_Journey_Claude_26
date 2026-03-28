@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticker Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .sticker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 20px 0;
+        }
+
+        .sticker-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sticker-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .sticker-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+
+        .sticker-card:hover::before {
+            animation: shine 0.6s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .sticker-emoji {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .sticker-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .sticker-category {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .search-bar {
+            max-width: 500px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            transform: scale(1.02);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .sticker-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            .sticker-emoji {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Sticker Collection</h1>
+        <p class="subtitle">Discover and collect your favorite stickers!</p>
+        
+        <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Search stickers..." id="searchInput">
+        </div>
+
+        <div class="sticker-grid" id="stickerGrid">
+            <!-- Stickers will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        const stickers = [
+            { name: "Heart Eyes", emoji: "😍", category: "Love" },
+            { name: "Party Popper", emoji: "🎉", category: "Celebration" },
+            { name: "Rocket", emoji: "🚀", category: "Motivation" },
+            { name: "Dancing", emoji: "💃", category: "Fun" },
+            { name: "Pizza", emoji: "🍕", category: "Food" },
+            { name: "Sun", emoji: "☀️", category: "Weather" },
+            { name: "Thumbs Up", emoji: "👍", category: "Approval" },
+            { name: "Laughing", emoji: "😂", category: "Emotions" },
+            { name: "Star", emoji: "⭐", category: "Special" },
+            { name: "Cat", emoji: "🐱", category: "Animals" },
+            { name: "Dog", emoji: "🐶", category: "Animals" },
+            { name: "Music", emoji: "🎵", category: "Music" },
+            { name: "Camera", emoji: "📸", category: "Photography" },
+            { name: "Gift", emoji: "🎁", category: "Gifts" },
+            { name: "Fire", emoji: "🔥", category: "Hot" },
+            { name: "Snowflake", emoji: "❄️", category: "Winter" },
+            { name: "Rainbow", emoji: "🌈", category: "Nature" },
+            { name: "Coffee", emoji: "☕", category: "Drinks" },
+            { name: "Book", emoji: "📚", category: "Education" },
+            { name: "Game Controller", emoji: "🎮", category: "Gaming" }
+        ];
+
+        function createStickerCard(sticker) {
+            return `
+                <div class="sticker-card" data-category="${sticker.category.toLowerCase()}">
+                    <span class="sticker-emoji">${sticker.emoji}</span>
+                    <div class="sticker-name">${sticker.name}</div>
+                    <div class="sticker-category">${sticker.category}</div>
+                </div>
+            `;
+        }
+
+        function renderStickers(stickersToShow) {
+            const grid = document.getElementById('stickerGrid');
+            grid.innerHTML = stickersToShow.map(createStickerCard).join('');
+        }
+
+        // Initial render
+        renderStickers(stickers);
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredStickers = stickers.filter(sticker => 
+                sticker.name.toLowerCase().includes(searchTerm) ||
+                sticker.emoji.includes(searchTerm) ||
+                sticker.category.toLowerCase().includes(searchTerm)
+            );
+            renderStickers(filteredStickers);
+        });
+
+        // Add click animation
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.sticker-card')) {
+                const card = e.target.closest('.sticker-card');
+                card.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 150);
+            }
+        });
+    </script>
+</body>
+</html>
