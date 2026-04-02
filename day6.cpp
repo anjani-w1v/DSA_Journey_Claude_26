@@ -35,7 +35,6 @@
 //     string original = user;
 //     int left = 0;
 //     int right = user.length()-1;
-//     //cout<<user.substr(user.length()-1,);
 //     while(left<right){              //two pointer technique
 //         char temp = user[left];
 //         user[left] = user[right];
